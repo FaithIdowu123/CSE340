@@ -1,6 +1,189 @@
+:root {
+  --heading-font: "Open Sans", sans-serif;
+  --subheading-font: "Roboto", sans-serif;
+  --body-font: "Montserrat", sans-serif;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+
+
+body {
+  margin: 0 auto;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
+  max-width: 900px;
+}
+
+h1 {
+  font-family: var(--heading-font);
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  font-family: var(--subheading-font);
+  margin: 0;
+  padding: 0;
+}
+
+p, li, a, figcaption {
+  font-family: var(--body-font);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header button {
+  border: none;
+  background-color: transparent;
+}
+
+nav{
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.Own {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  top: 20px;
+  margin-left: 5px;
+  margin-top: -10px;
+  position: absolute;
+  background-color: rgb(255, 255, 255, 0.8);
+  text-align: left;
+  height: auto;
+  
+}
+
+.Own h2{
+  padding: 1px;
+  margin: 0px;
+  font-size: clamp(1rem, 3vw, 3.5rem);
+  font-weight: bold;
+  color: rgb(0, 13, 255);
+}
+
+.Own ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Own li{
+  padding: 0;
+  margin: 0;
+  font-size: clamp(0.5rem, 2vw, 2.5rem);
+  color: rgb(0, 58, 55);
+}
+
+.Own button {
+  margin-top: 20px;
+  width: 30vw;
+  max-width: 200px;
+  background-color: transparent;
+  border: none;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+}
+
+.upgrades {
+  max-width: 450px;
+}
+
+.upgrades h3{
+  font-size: x-large;
+  margin-bottom: 10px;
+} 
+
+.upgrades .images {
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  column-gap: 20px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: -10px;
+}
+figure {
+  width: 100%;
+  text-align: center;
+}
+
+.Upgradeimage {
+  background-color: rgb(0, 102, 255);
+  height: 70px;
+  width: 100%;
+}
+
+.Upgradeimage img{
+  width: 50px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.reviews h3{
+  font-size: x-large;
+  margin-bottom: 10px;
+}
+
+.reviews li{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+
+@media (min-width: 740px) {
+  body {
+    margin: 20px auto;
+    border: 6px solid rgb(156, 156, 244);
+  }
+
+  html {
+    /* The page-wide background image */
+    background-image: url('/images/site/small_check.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+  }
+  
 }
