@@ -19,7 +19,7 @@ WHERE inv_id = 10;
 
 --5
 SELECT * FROM public.inventory AS I
-	JOIN public.classification AS C
+	INNER JOIN public.classification AS C
 		ON I.inv_model = C.classification_name;
 
 --6
