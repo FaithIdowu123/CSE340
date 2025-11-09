@@ -24,5 +24,5 @@ SELECT * FROM public.inventory AS I
 
 --6
 UPDATE public.inventory
-SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicle/'),
-	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicle/');
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
