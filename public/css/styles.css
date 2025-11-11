@@ -219,6 +219,27 @@ figure {
   padding-bottom: 20px;
 }
 
+#inv-detail-display {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+#inv-info ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#inv-info li {
+  padding: 20px 1px;
+  font-size: large;
+}
+
+#inv-info li:nth-child(odd) {
+ background-color: rgb(233, 233, 233);
+}
 
 
 @media (min-width: 740px) {
