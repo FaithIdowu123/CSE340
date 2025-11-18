@@ -192,7 +192,7 @@ figure {
   padding: 0;
   margin: 0;
   border: 2px solid black;
-  height: 220px;
+  max-height: 280px;
   border-radius: 6px;
   overflow: hidden;
   text-align: center;
@@ -241,7 +241,7 @@ figure {
  background-color: rgb(233, 233, 233);
 }
 
-#account {
+form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -262,7 +262,7 @@ figure {
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-    margin: 0 auto;
+    margin-left: 20px;
 
     label {
       font-size: 1.2rem;
@@ -272,10 +272,17 @@ figure {
         font-size: 1rem;
       }
 
-      input {
+      input, select {
         display: block;
         width: 200px;
         height: 32px;
+        border-radius: 12px;
+      }
+
+      textarea {
+        display: block;
+        width: 300px;
+        height: 100px;
         border-radius: 12px;
       }
 
@@ -293,9 +300,10 @@ figure {
       width: 150px;
       height: 32px;
       border-radius: 12px;
-      margin: auto 0;
+      margin: 0;
     }
   }
+
 
   button {
     width: 100px;
@@ -306,7 +314,7 @@ figure {
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
-    margin: 0 auto;
+    margin-left: 20px;
   }
 
   p  {
@@ -314,6 +322,13 @@ figure {
     font-size: 1rem;
   }
 }
+
+
+#add-classification button, #add-vehicle button {
+  width: 200px;
+}
+
+
 
 
 @media (min-width: 740px) {

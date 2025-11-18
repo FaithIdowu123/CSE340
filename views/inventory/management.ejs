@@ -1,0 +1,13 @@
+<%# management view ejs%>
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<ul class="management">
+  <li><a href="/inv/add-classification" class="button">Add New classfication</a></li>
+  <li><a href="/inv/add-vehicle" class="button">Add New Vehicle</a></li>
+</ul>
