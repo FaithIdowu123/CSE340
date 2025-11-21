@@ -46,7 +46,8 @@ invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add-classification", {
     title: "Add Classification",
-    nav
+    nav,
+    errors: null
   })
 }
 
@@ -81,6 +82,7 @@ invCont.buildAddVehicle = async function (req, res, next) {
   res.render("./inventory/add-vehicle", {
     title: "Add Inventory",
     nav,
+    errors: null,
     classification_id
   })
 }
