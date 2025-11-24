@@ -4,10 +4,19 @@
   res.redirect('/')
 } %>
 
-<form id="account">
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<%- messages() %>
+<form id="account" action="/account/login" method="post">
     <h2><%= title %></h2>
     <div>
-        <label>Email: <input type="email" id="email" name="email" required></label>
+        <label>Email: <input type="email" id="email" name="account_email" required></label>
         <label>Password: <input type="password" name="account_password" id="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"></label>
         <button type="button" id="pswbtn">Show password</button>
     </div>

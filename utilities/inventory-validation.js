@@ -87,6 +87,8 @@ validate.vehicleRules = () => {
     ]
 }
 
+
+
 validate.checkVehicleData = async (req, res, next) => {
   const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color} = req.body
   let errors = []
@@ -106,6 +108,101 @@ validate.checkVehicleData = async (req, res, next) => {
       inv_price, 
       inv_miles, 
       inv_color
+    })
+    return
+  }
+  next()
+}
+
+validate.updateRules = () => {
+  return [
+    body("inv_make")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please provide a vehicle make"), // on error this message is sent.
+
+    body("inv_model")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please provide a vehicle model"), // on error this message is sent.
+
+    body("inv_year")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isInt({ min: 1886 })
+    .withMessage("Please provide a valid vehicle year"), // on error this message is sent.
+
+    body("inv_description")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 10 })
+    .withMessage("Please provide a valid vehicle description"), // on error this message is sent.
+
+    body("inv_image")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 10 })
+    .withMessage("Please provide a valid vehicle image"), // on error this message is sent.
+
+    body("inv_thumbnail")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 10 })
+    .withMessage("Please provide a valid vehicle thummbnail"), // on error this message is sent.
+
+    body("inv_price")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isFloat({ min: 0 })
+    .withMessage("Please provide a valid vehicle price"), // on error this message is sent.
+
+    body("inv_miles")
+    .trim()
+    .escape()
+    .notEmpty() 
+    .isFloat({ min: 0 })
+    .withMessage("Please provide a valid vehicle mileage"), // on error this message is sent.
+
+    body("inv_color")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 3 })
+    .withMessage("Please provide a valid vehicle color"), // on error this message is sent. 
+  ]
+}
+
+validate.checkUpdateData = async (req, res, next) => {
+  const { classification_id, inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color} = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let classification_id = await utilities.buildClassificationSelect()
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "edit Vehicle",
+      nav, 
+      classification_id,
+      inv_id,
+      inv_make, 
+      inv_model,
+      inv_year, 
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price, 
+      inv_miles, 
+      inv_color,
     })
     return
   }

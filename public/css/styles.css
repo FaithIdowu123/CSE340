@@ -317,11 +317,17 @@ form {
     margin-left: 20px;
   }
 
+  button:disabled {
+    background-color: rgb(138, 152, 172);
+    cursor: not-allowed;
+  }
+
   p  {
     text-align: center;
     font-size: 1rem;
   }
 }
+
 
 
 #add-classification button, #add-vehicle button {

@@ -1,0 +1,35 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+
+<form id="updateForm" action="../update/" method="post">
+    <h2><%= title %></h2>
+    <div>
+        <label>Vehicle Classification: <%- classificationSelect %></label>
+        <label>Vehicle Make: <input type="text" name="inv_make" id="invMake" required value="<%= locals.inv_make %>"></label>
+        <label>Vehicle Model: <input type="text" name="inv_model" id="invModel" required value="<%= locals.inv_model %>"></label>
+        <label>Vehicle Year: <input type="number" name="inv_year" id="invYear" required min="1886" max="2024" value="<%= locals.inv_year %>"></label>
+        <label>Vehicle Description: <textarea name="inv_description" id="invDescription" required></textarea></label>
+        <label>Vehicle Image URL: <input type="text" name="inv_image" id="invImage" required value="<%= locals.inv_image %>"></label>
+        <label>Vehicle Thumbnail URL: <input type="text" name="inv_thumbnail" id="invThumbnail" required value="<%= locals.inv_thumbnail %>"></label>
+        <label>Vehicle Price: <input type="number" name="inv_price" id="invPrice" required step="0.01" value="<%= locals.inv_price %>"></label>
+        <label>Vehicle Miles: <input type="number" name="inv_miles" id="invMiles" required value="<%= locals.inv_miles %>"></label>
+        <label>Vehicle Color: <input type="text" name="inv_color" id="invColor" required value="<%= locals.inv_color %>"></label>
+    </div>
+    <button type="submit" id="updatebutton" disabled >Edit vehicle</button>
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>
+</form>
+
+<script>document.getElementById("invDescription").value = "<%= locals.inv_description %>";</script>
+<script src="../../js/inv-update.js"></script>
