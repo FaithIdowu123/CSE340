@@ -54,7 +54,7 @@ Util.buildClassificationGrid = async function(data){
     })
     grid += '</ul>'
   } else { 
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
 }
@@ -131,14 +131,24 @@ Util.checkJWTToken = (req, res, next) => {
 /* ****************************************
  *  Check Login
  * ************************************ */
- Util.checkLogin = (req, res, next) => {
+Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
+
+Util.authorize = (req, res, next) => {
+  const accountData = res.locals.accountData
+  if (accountData.account_type == "Admin" || accountData.account_type == "Employee") {
+    next()
+  } else {
+    req.flash("notice", "You are not authorized to access that page.")
+    return res.redirect("/")
+  }
+}
 
 module.exports = Util
 

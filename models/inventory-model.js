@@ -7,6 +7,19 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
+async function getClassificationById(classification_id){
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.classification
+      WHERE classification_id = $1`,
+      [classification_id]
+    )
+    return data.rows[0]
+  } catch (error) {
+    console.error("getClassificationById error " + error)
+  }
+}
+
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -96,4 +109,15 @@ async function updateInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, registerClassification, registerVehicle, updateInventory};
+async function deleteInventory(inv_id) {
+  try {
+    const sql = "DELETE FROM public.inventory WHERE inv_id = $1"
+    const data = await pool.query(sql, [inv_id])
+    return data
+  } catch (error) {
+    console.error("deleteInventory error " + error)
+  }
+}
+
+
+module.exports = {getClassifications, getClassificationById, getInventoryByClassificationId, getInventoryByInvId, registerClassification, registerVehicle, updateInventory, deleteInventory};

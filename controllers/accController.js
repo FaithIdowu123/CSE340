@@ -28,11 +28,12 @@ async function buildRegister(req, res, next) {
 
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
-  req.flash("notice", "You have successfully logged in.")
+  const accountData = res.locals.accountData;
   res.render("account/account-management", {
     errors: null,
     title: "Account Management",
-    nav,
+    accountData,
+    nav
   })
 }
 
@@ -125,4 +126,67 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+async function buildUpdate(req, res, next) {
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(req.params.account_id);
+  res.render("account/update-account", {
+    errors: null,
+    title: "Account Update",
+    accountData,
+    nav
+  })
+}
+
+async function updateAccountInfo(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+  const updateResult = await accountModel.updateAccountInfo(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (updateResult) {
+    req.flash("notice", `Your account information was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/update-account", {
+      title: "Account Update",
+      nav,
+    })
+  }
+}
+
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav()
+  const {new_password, account_id } = req.body
+  // Hash the password before storing
+  let hashedPassword
+  hashedPassword = await bcrypt.hashSync(new_password, 10)
+
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
+
+  if (updateResult) {
+    req.flash("notice", `Your password was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the password update failed.")
+    res.status(501).render("account/update-account", {
+      title: "Account Update",
+      nav,
+      accountData
+    })
+  }
+}
+
+async function accountLogout(req, res) {
+  res.clearCookie("jwt")
+  res.redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdate, updateAccountInfo, updatePassword, accountLogout }

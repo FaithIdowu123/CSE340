@@ -4,6 +4,14 @@
         <h1>CSE Motors</h1>
         
     </div>
-    
-    <button><a href="/account/login" title="click to log in">My Account</a></button>
+
+    <% if (locals.loggedin) { %>
+        <div id="account_buttons">
+            <button><a href="/account/">Welcome </a></button>
+            <button><a href="/account/logout">Logout</a></button>
+        </div>
+    <% } else { %>
+        <button><a href="/account/login" title="click to log in">My Account</a></button>
+    <% } %>
+  
 </header>

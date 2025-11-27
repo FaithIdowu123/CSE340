@@ -297,8 +297,8 @@ form {
     button {
       font-size: 1rem;
       display: block;
-      width: 150px;
-      height: 32px;
+      width: fit-content;
+      padding: 10px;
       border-radius: 12px;
       margin: 0;
     }
@@ -306,8 +306,8 @@ form {
 
 
   button {
-    width: 100px;
-    height: 40px;
+    width: fit-content;
+    padding: 10px;
     border: 1px solid black;
     border-radius: 12px;
     background-color: rgb(0, 102, 255);
@@ -334,7 +334,32 @@ form {
   width: 200px;
 }
 
+#account_buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+#update_account {
+  max-width: 100%;
+  background-color: white;
+  border: none;
+  border-radius: 0;
+
+  div {
+    width: 100%;
+    span {
+      width: 100%;
+    }
+  }
+  input, select {
+    border-radius: 0;
+    width: 300px;
+  }
+}
 
 
 @media (min-width: 740px) {
