@@ -28,7 +28,7 @@ async function buildRegister(req, res, next) {
 
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
-  const accountData = res.locals.accountData;
+  const accountData = await accountModel.getAccountById(res.locals.accountData.account_id);
   res.render("account/account-management", {
     errors: null,
     title: "Account Management",
