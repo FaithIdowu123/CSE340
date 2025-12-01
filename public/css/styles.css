@@ -224,6 +224,11 @@ figure {
   flex-direction: row;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+#inv-info{
+  width: 300px;
 }
 
 #inv-info ul {
@@ -235,6 +240,11 @@ figure {
 #inv-info li {
   padding: 20px 1px;
   font-size: large;
+}
+
+#inv-image {
+  max-width: 500px;
+  width: 100%;
 }
 
 #inv-info li:nth-child(odd) {
@@ -358,6 +368,36 @@ form {
   input, select {
     border-radius: 0;
     width: 300px;
+  }
+}
+
+#reviews{
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 10px;
+}
+
+#reviews #reviews_container {
+  position: relative;
+  background-color: rgb(142, 146, 150);
+  border-top: 2px solid black;
+  padding: 5px;
+}
+
+#reviews #reviews_container #review_date{
+  text-align: right;
+}
+
+#reviews_container button{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  border: none;
+  background-color: transparent;
+
+  a {
+    text-decoration: none;
+    font-size: large;
   }
 }
 

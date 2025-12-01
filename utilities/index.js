@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const accModel = require("../models/account-model")
+const reviewModel = require("../models/review-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -80,6 +82,7 @@ Util.buildInvDetailView = async function(data){
     view += '</ul>'
     view += '</div>'
     view += '</div>'
+    view += '<a href="../../review/add/'+ data.inv_id +'">Add review</a>'
   } else {
     view = '<p class="notice">Sorry, no vehicle information could be found.</p>'
   }
@@ -148,6 +151,49 @@ Util.authorize = (req, res, next) => {
     req.flash("notice", "You are not authorized to access that page.")
     return res.redirect("/")
   }
+}
+
+Util.reviewAuthorize = async (req, res, next) => {
+  const review_id = req.params.review_id
+  const accountData = res.locals.accountData
+  const account_id = accountData.account_id
+  const reviews = await reviewModel.getReviewsById(review_id)
+  if (accountData.account_type == "Admin" || accountData.account_type == "Employee" || account_id == reviews.account_id) {
+    next()
+  } else {
+    req.flash("notice", "You are not authorized to edit this review.")
+    return res.redirect("/inv/detail/"+reviews.inv_id)
+  }
+}
+
+Util.buildInventoryReviewList = async function(data) {
+  let view 
+  console.log(data)
+  if(data && data.length > 0){
+    view = '<div id="reviews">'
+    for (let review of data) {
+      const review_id = review.review_id
+      const user = await accModel.getAccountById(review.account_id)
+      const date = new Date(review.review_date).toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      })
+      view += '<div id="reviews_container">'
+      view += '<h3 id="review_user">'+ user.account_firstname + " " + user.account_lastname + '</h3>'
+      view += '<button><a href="../../review/delete/'+ review_id +'" title="click to delete this review">❌</a></button>'
+      view += '<p id="review_text">'+ review.review_text + '</p>'
+      view += '<p id="review_date">' + date + '</p>'
+      view += '</div>'
+    }
+    view += '</div>'
+  } else {
+    view = '<p id="reviews"> There are no reviews </p>'
+  }
+  return view
 }
 
 module.exports = Util
