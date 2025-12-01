@@ -60,6 +60,8 @@ nav ul{
   display: flex;
   justify-content: space-around;
   padding: 10px;
+  list-style-type: none;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -245,6 +247,11 @@ figure {
 #inv-image {
   max-width: 500px;
   width: 100%;
+}
+
+#inv-image img {
+  width: 100%;
+  height: auto;
 }
 
 #inv-info li:nth-child(odd) {
