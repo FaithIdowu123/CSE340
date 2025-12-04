@@ -53,4 +53,15 @@ async function deleteReview(review_id) {
   }
 }
 
-module.exports = {getReviewsByInventory, insertReview, getReviewsById, deleteReview}
+async function updateReview(review_text, review_id) {
+  try {
+    const sql = 'UPDATE public.review SET review_text = $1 WHERE review_id = $2 RETURNING *'
+    const result = await pool.query(sql, [review_text, review_id])
+    return result.rows[0]
+  } catch (error) {
+    return new Error("Unable to update review")
+  }
+}
+
+
+module.exports = {getReviewsByInventory, insertReview, getReviewsById, deleteReview, updateReview}

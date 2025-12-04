@@ -184,9 +184,10 @@ Util.buildInventoryReviewList = async function(data) {
       })
       view += '<div id="reviews_container">'
       view += '<h3 id="review_user">'+ user.account_firstname + " " + user.account_lastname + '</h3>'
-      view += '<button><a href="../../review/delete/'+ review_id +'" title="click to delete this review">❌</a></button>'
+      view += '<button id="delete"><a href="../../review/delete/'+ review_id +'" title="click to delete this review">❌</a></button>'
       view += '<p id="review_text">'+ review.review_text + '</p>'
       view += '<p id="review_date">' + date + '</p>'
+      view += '<button id="edit"><a href="../../review/edit/'+ review_id +'" title="click to edit this review">&#128393;</a></button>'
       view += '</div>'
     }
     view += '</div>'

@@ -23,4 +23,15 @@ router.post("/delete",
     reviewValidate.reviewRules(),
     reviewValidate.checkReviewData,
     utilities.handleErrors(reviewController.deleteReview));
+
+router.get("/edit/:review_id",
+    utilities.checkLogin,
+    utilities.reviewAuthorize,
+    utilities.handleErrors(reviewController.buildEditReviewForm));
+
+router.post("/edit", 
+    reviewValidate.reviewRules(),
+    reviewValidate.checkReviewData,
+    utilities.handleErrors(reviewController.editReview));
+
 module.exports = router;

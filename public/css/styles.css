@@ -408,6 +408,17 @@ form {
   }
 }
 
+#reviews_container #edit{
+  position: absolute;
+  right: 50px;
+  top: -3px;
+
+  a {
+    font-size: 30px;
+    color: black;
+  }
+}
+
 
 @media (min-width: 740px) {
   body {

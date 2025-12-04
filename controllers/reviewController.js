@@ -38,12 +38,36 @@ reviewCont.postReview = async function(req, res, next) {
     }
 }
 
-reviewCont.buildDeleteReviewForm = async function(req, res, next){
+reviewCont.buildEditReviewForm = async function(req, res, next){
     let nav = await utilities.getNav()
     const review_id = req.params.review_id
     console.log(review_id)
     const reviews = await reviewModel.getReviewsById(review_id)
     console.log(reviews)
+    res.render("review/edit-review", {
+        errors: null,
+        title: "Edit Review",
+        reviews,
+        nav
+    })
+}
+
+reviewCont.editReview = async function(req, res, next) {
+    const { review_text, review_id, inv_id, account_id } = req.body
+    const editResult = await reviewModel.updateReview(review_text, review_id)
+    if (editResult) {
+        req.flash("notice", `The review was successfully edited.`)
+        res.redirect("/inv/detail/"+inv_id)
+    } else {
+        req.flash("notice", "Sorry, the review failed to update.")
+        res.redirect("/review/edit/"+review_id)
+    }
+}
+
+reviewCont.buildDeleteReviewForm = async function(req, res, next){
+    let nav = await utilities.getNav()
+    const review_id = req.params.review_id
+    const reviews = await reviewModel.getReviewsById(review_id)
     res.render("review/delete-review", {
         errors: null,
         title: "Delete Review",
